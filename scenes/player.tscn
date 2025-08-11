@@ -1,8 +1,101 @@
-[gd_scene load_steps=17 format=3 uid="uid://hwmgqg603fae"]
+[gd_scene load_steps=19 format=3 uid="uid://hwmgqg603fae"]
 
 [ext_resource type="Script" uid="uid://qajblsskt5wv" path="res://scripts/player.gd" id="1_qhqgy"]
-[ext_resource type="Texture2D" uid="uid://di5gffdg7yuu8" path="res://assets/entity.png" id="2_dqkch"]
-[ext_resource type="Texture2D" uid="uid://dp5ab8fn3hsw5" path="res://assets/sword.png" id="3_qlg0r"]
+[ext_resource type="Shader" uid="uid://dpcyeveyw771a" path="res://scripts/damage_flash.gdshader" id="2_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://csfdp2aacgjxo" path="res://assets/tile_0098.png" id="3_dqkch"]
+[ext_resource type="Texture2D" uid="uid://d1dfggf7vinty" path="res://assets/tile_0106.png" id="4_dqkch"]
+
+[sub_resource type="Animation" id="Animation_dqkch"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:material:shader_parameter/flash_value")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_qlg0r"]
+resource_name = "hurt"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(0.5, -2, 0.5),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.7, 0.7), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/flash_value")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(0.5, 2, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
 
 [sub_resource type="Animation" id="Animation_qhqgy"]
 resource_name = "walk"
@@ -45,61 +138,17 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector2(1, 1), Vector2(0.8, 1.2), Vector2(1.4, 0.8), Vector2(1, 1)]
 }
-
-[sub_resource type="Animation" id="Animation_dqkch"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:scale")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
+"transitions": PackedFloat32Array(0.5, 2, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_qlg0r"]
-resource_name = "hurt"
-length = 0.2
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:scale")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(0.5, -2, 0.5),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0.7, 0.7), Vector2(1, 1)]
+"values": [Vector2(1, 1), Vector2(0.8, 1.2), Vector2(1.4, 0.8), Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qlg0r"]
@@ -108,6 +157,12 @@ _data = {
 &"hurt": SubResource("Animation_qlg0r"),
 &"walk": SubResource("Animation_qhqgy")
 }
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tuyoq"]
+resource_local_to_scene = true
+shader = ExtResource("2_qlg0r")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_value = 0.0
 
 [sub_resource type="Animation" id="Animation_fjrip"]
 length = 0.001
@@ -121,7 +176,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [-0.261799]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -150,7 +205,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(0.5, -2),
 "update": 0,
-"values": [0.0, 4.45059]
+"values": [-0.261799, 4.45059]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -193,7 +248,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.65),
 "transitions": PackedFloat32Array(-2, -2, 0.5),
 "update": 0,
-"values": [4.45059, 4.45059, 0.0]
+"values": [4.45059, 4.45059, -0.261799]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -313,6 +368,7 @@ size = Vector2(8, 3)
 [node name="Player" type="CharacterBody2D"]
 light_mask = 2
 visibility_layer = 5
+z_index = 1
 script = ExtResource("1_qhqgy")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -322,15 +378,14 @@ libraries = {
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("2_dqkch")
-hframes = 2
-vframes = 2
+material = SubResource("ShaderMaterial_tuyoq")
+texture = ExtResource("3_dqkch")
 
 [node name="Sword" type="Sprite2D" parent="Sprite2D"]
-position = Vector2(0, 4)
-texture = ExtResource("3_qlg0r")
-offset = Vector2(-8, -8)
-hframes = 2
+position = Vector2(1, 3)
+rotation = -0.261799
+texture = ExtResource("4_dqkch")
+offset = Vector2(-8, -5)
 
 [node name="SwordAnim" type="AnimationPlayer" parent="Sprite2D/Sword"]
 libraries = {
@@ -347,7 +402,7 @@ position = Vector2(0, 3.5)
 shape = SubResource("RectangleShape2D_f1ej7")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(5, 5)
+zoom = Vector2(4, 4)
 process_callback = 0
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true

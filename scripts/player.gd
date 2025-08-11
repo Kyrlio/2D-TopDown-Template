@@ -74,13 +74,6 @@ func update_look():
 	elif current_look_dir == "left" and get_global_mouse_position().x > global_position.x:
 		flip_anim.play("look_right")
 		current_look_dir = "right"
-	
-	if get_global_mouse_position().y > global_position.y:
-		sword.show_behind_parent = false
-		$Sprite2D.frame = 0
-	else:
-		sword.show_behind_parent = true
-		$Sprite2D.frame = 1
 
 
 const sword_slash_preload = preload("res://scenes/sword_slash.tscn")

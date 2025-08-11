@@ -26,7 +26,6 @@ can_move = false
 
 [node name="Enemy3" parent="." instance=ExtResource("3_x4b8f")]
 position = Vector2(488, 353)
-can_move = false
 
 [node name="Enemy4" parent="." instance=ExtResource("3_x4b8f")]
 position = Vector2(437, 314)
