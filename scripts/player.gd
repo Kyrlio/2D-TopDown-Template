@@ -41,7 +41,6 @@ func _physics_process(delta: float) -> void:
 		sword_anim.play("slash")
 		can_slash = false
 	
-	#move(delta)
 	update_look() 
 	move_and_slide()
 
@@ -102,14 +101,17 @@ func apply_knockback(direction: Vector2, force: float, knockback_duration: float
 
 
 func take_damage(damage: float):
-	health -= damage
-	print("life : " + str(health))
-	
-	if health <= 0.0:
-		queue_free()
-	
-	is_hurt = true
-	animation_player.play("hurt")
+	if not is_hurt:
+		health -= damage
+		print("life : " + str(health))
+		
+		if health <= 0.0:
+			queue_free()
+		
+		is_hurt = true
+		animation_player.play("hurt")
+	else:
+		return
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:

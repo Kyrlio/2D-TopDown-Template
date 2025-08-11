@@ -55,8 +55,9 @@ func take_damage(weapon_damage: float):
 		return
 
 
-func change_damage_bool():
-	taking_damage = false if taking_damage == true else true
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "take_damage":
+		taking_damage = false
 
 
 func death():
