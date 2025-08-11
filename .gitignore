@@ -1,0 +1,25 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+.import/
+export_presets.cfg
+*.import
+*.mono/
+export/
+.cache/
+
+# IDEs/editors
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS
+.DS_Store
+thumbs.db
+*~ 
+*.swp
+
+# Build
+bin/
+obj/

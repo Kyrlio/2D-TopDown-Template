@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://763naix20y55"]
+
+[ext_resource type="Texture2D" uid="uid://dyf12pofcxrsk" path="res://assets/BG.png" id="1_2venv"]
+[ext_resource type="PackedScene" uid="uid://hwmgqg603fae" path="res://scenes/player.tscn" id="2_j6w7d"]
+[ext_resource type="PackedScene" uid="uid://1krmrwbscl21" path="res://scenes/enemy.tscn" id="3_x4b8f"]
+
+[node name="TestLevel" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -100
+texture_filter = 1
+offset_right = 1155.0
+offset_bottom = 664.0
+texture = ExtResource("1_2venv")
+stretch_mode = 1
+
+[node name="Player" parent="." instance=ExtResource("2_j6w7d")]
+position = Vector2(489, 310)
+slash_time = 0.15
+
+[node name="Enemy" parent="." instance=ExtResource("3_x4b8f")]
+position = Vector2(488, 276)
+
+[node name="Enemy2" parent="." instance=ExtResource("3_x4b8f")]
+position = Vector2(544, 314)
+
+[node name="Enemy3" parent="." instance=ExtResource("3_x4b8f")]
+position = Vector2(488, 353)
+
+[node name="Enemy4" parent="." instance=ExtResource("3_x4b8f")]
+position = Vector2(437, 314)
