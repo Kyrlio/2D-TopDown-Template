@@ -1,9 +1,5 @@
 extends CharacterBody2D
-
-@onready var flip_anim: AnimationPlayer = $Sprite2D/flip_anim
-@onready var sword: Sprite2D = $Sprite2D/Sword
-@onready var sword_anim: AnimationPlayer = $Sprite2D/Sword/SwordAnim
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
+class_name Player
 
 const MAX_SPEED: int = 65
 const ACCELERATION: float = 16.5
@@ -11,20 +7,40 @@ const FRICTION: float = 8.5
 
 var current_look_dir = "right"
 
+# --- ANIMATIONS ---
+@onready var flip_anim: AnimationPlayer = $Sprite2D/flip_anim
+@onready var sword: Sprite2D = $Sprite2D/Sword
+@onready var sword_anim: AnimationPlayer = $Sprite2D/Sword/SwordAnim
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
+@export var health: float = 3.0
+var taking_damage: bool = false
+
+# --- ATTACKS ---
 var can_slash: bool = true
 @export var slash_time: float = 0.2
 @export var sword_return_time: float = 0.5
 @export var weapon_damage: float = 1.0
 
+var knockback: Vector2 = Vector2.ZERO
+var knockback_timer: float = 0.0
+
 
 func _physics_process(delta: float) -> void:
+	if knockback_timer > 0.0:
+		velocity = knockback
+		knockback_timer -= delta
+		if knockback_timer <= 0.0:
+			knockback = Vector2.ZERO
+	else:
+		move(delta)
 	# --- ATTACK ---
 	if Input.is_action_pressed("attack") and can_slash:
 		sword_anim.speed_scale = sword_anim.get_animation("slash").length / slash_time
 		sword_anim.play("slash")
 		can_slash = false
 	
-	move(delta)
+	#move(delta)
 	update_look() 
 	move_and_slide()
 
@@ -83,3 +99,20 @@ func _on_sword_anim_animation_finished(anim_name: StringName) -> void:
 		sword_anim.play("sword_return")
 	else:
 		can_slash = true
+
+
+func apply_knockback(direction: Vector2, force: float, knockback_duration: float) -> void:
+	knockback = direction * force
+	knockback_timer = knockback_duration
+
+
+func take_damage(damage: float):
+	$AnimationPlayer.play("hurt")
+	health -= damage
+	print("life : " + str(health))
+	
+	if health <= 0.0:
+		queue_free()
+	
+	taking_damage = true
+	

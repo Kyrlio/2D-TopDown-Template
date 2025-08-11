@@ -1,7 +1,8 @@
 extends Node2D
 
 var weapon_damage: float = 1.0
-
+@export var knockback_force: float = 50.0
+@export var knockback_duration: float = 0.12
 
 func _ready() -> void:
 	look_at(get_global_mouse_position())
@@ -14,5 +15,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group("enemy"):
+	if body.is_in_group("enemy") and body is Enemy:
 		body.take_damage(weapon_damage)
+		var knockback_direction = (body.global_position - global_position).normalized()
+		body.apply_knockback(knockback_direction, knockback_force, knockback_duration)

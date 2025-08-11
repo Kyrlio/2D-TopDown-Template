@@ -16,16 +16,18 @@ stretch_mode = 1
 
 [node name="Player" parent="." instance=ExtResource("2_j6w7d")]
 position = Vector2(489, 310)
-slash_time = 0.15
 
 [node name="Enemy" parent="." instance=ExtResource("3_x4b8f")]
 position = Vector2(488, 276)
 
 [node name="Enemy2" parent="." instance=ExtResource("3_x4b8f")]
 position = Vector2(544, 314)
+can_move = false
 
 [node name="Enemy3" parent="." instance=ExtResource("3_x4b8f")]
 position = Vector2(488, 353)
+can_move = false
 
 [node name="Enemy4" parent="." instance=ExtResource("3_x4b8f")]
 position = Vector2(437, 314)
+can_move = false

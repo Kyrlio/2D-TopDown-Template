@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://hwmgqg603fae"]
+[gd_scene load_steps=17 format=3 uid="uid://hwmgqg603fae"]
 
 [ext_resource type="Script" uid="uid://qajblsskt5wv" path="res://scripts/player.gd" id="1_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://di5gffdg7yuu8" path="res://assets/entity.png" id="2_dqkch"]
@@ -85,9 +85,27 @@ tracks/2/keys = {
 "values": [Vector2(1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_qlg0r"]
+resource_name = "hurt"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(0.5, -2, 0.5),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.7, 0.7), Vector2(1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qlg0r"]
 _data = {
 &"RESET": SubResource("Animation_dqkch"),
+&"hurt": SubResource("Animation_qlg0r"),
 &"walk": SubResource("Animation_qhqgy")
 }
 
@@ -293,6 +311,8 @@ _data = {
 size = Vector2(8, 3)
 
 [node name="Player" type="CharacterBody2D"]
+light_mask = 2
+visibility_layer = 5
 script = ExtResource("1_qhqgy")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
