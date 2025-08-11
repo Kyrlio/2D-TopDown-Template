@@ -14,7 +14,7 @@ var current_look_dir = "right"
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 @export var health: float = 3.0
-var taking_damage: bool = false
+var is_hurt: bool = false
 
 # --- ATTACKS ---
 var can_slash: bool = true
@@ -33,7 +33,8 @@ func _physics_process(delta: float) -> void:
 		if knockback_timer <= 0.0:
 			knockback = Vector2.ZERO
 	else:
-		move(delta)
+		if not is_hurt:
+			move(delta)
 	# --- ATTACK ---
 	if Input.is_action_pressed("attack") and can_slash:
 		sword_anim.speed_scale = sword_anim.get_animation("slash").length / slash_time
@@ -58,7 +59,8 @@ func move(delta: float):
 		animation_player.speed_scale = (velocity/MAX_SPEED).distance_to(Vector2.ZERO) + 0.1
 	else:
 		animation_player.speed_scale = 0.75
-		animation_player.stop()
+		if not is_hurt:
+			animation_player.stop()
 	
 	var velocity_weight_x: float = 1.0 - exp( -(ACCELERATION if input.x else FRICTION) * delta)
 	velocity.x = lerp(velocity.x, input.x * MAX_SPEED, velocity_weight_x)
@@ -100,12 +102,16 @@ func apply_knockback(direction: Vector2, force: float, knockback_duration: float
 
 
 func take_damage(damage: float):
-	$AnimationPlayer.play("hurt")
 	health -= damage
 	print("life : " + str(health))
 	
 	if health <= 0.0:
 		queue_free()
 	
-	taking_damage = true
-	
+	is_hurt = true
+	animation_player.play("hurt")
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "hurt":
+		is_hurt = false

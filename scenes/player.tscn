@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://qajblsskt5wv" path="res://scripts/player.gd" id="1_qhqgy"]
 [ext_resource type="Shader" uid="uid://dpcyeveyw771a" path="res://scripts/damage_flash.gdshader" id="2_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://csfdp2aacgjxo" path="res://assets/tile_0098.png" id="3_dqkch"]
-[ext_resource type="Texture2D" uid="uid://d1dfggf7vinty" path="res://assets/tile_0106.png" id="4_dqkch"]
+[ext_resource type="Texture2D" uid="uid://gdrwf3aya6km" path="res://assets/tile_0104.png" id="4_dqkch"]
 
 [sub_resource type="Animation" id="Animation_dqkch"]
 length = 0.001
@@ -70,7 +70,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_qlg0r"]
 resource_name = "hurt"
-length = 0.3
+length = 0.2
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -79,7 +79,7 @@ tracks/0/path = NodePath("Sprite2D:scale")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3),
+"times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(0.5, -2, 0.5),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(0.7, 0.7), Vector2(1, 1)]
@@ -91,7 +91,7 @@ tracks/1/path = NodePath("Sprite2D:material:shader_parameter/flash_value")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3),
+"times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(0.5, 2, 1),
 "update": 0,
 "values": [0.0, 1.0, 0.0]
@@ -368,8 +368,9 @@ size = Vector2(8, 3)
 [node name="Player" type="CharacterBody2D"]
 light_mask = 2
 visibility_layer = 5
-z_index = 1
+z_index = 2
 script = ExtResource("1_qhqgy")
+health = 10.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -407,4 +408,5 @@ process_callback = 0
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="Sprite2D/Sword/SwordAnim" to="." method="_on_sword_anim_animation_finished"]

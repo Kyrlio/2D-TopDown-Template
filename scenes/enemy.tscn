@@ -170,6 +170,7 @@ light_mask = 4
 visibility_layer = 2
 z_index = 1
 script = ExtResource("1_md0e3")
+knockback_force = 100.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
