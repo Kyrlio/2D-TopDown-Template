@@ -20,32 +20,17 @@ position = Vector2(489, 310)
 [node name="Enemy" parent="." instance=ExtResource("3_x4b8f")]
 position = Vector2(457, 239)
 
-[node name="Enemy5" parent="." instance=ExtResource("3_x4b8f")]
-position = Vector2(520, 227)
-
 [node name="Enemy6" parent="." instance=ExtResource("3_x4b8f")]
 position = Vector2(381, 217)
 
 [node name="Enemy7" parent="." instance=ExtResource("3_x4b8f")]
 position = Vector2(364, 333)
 
-[node name="Enemy8" parent="." instance=ExtResource("3_x4b8f")]
-position = Vector2(403, 357)
-
-[node name="Enemy9" parent="." instance=ExtResource("3_x4b8f")]
-position = Vector2(539, 372)
-
 [node name="Enemy10" parent="." instance=ExtResource("3_x4b8f")]
 position = Vector2(568, 327)
 
-[node name="Enemy11" parent="." instance=ExtResource("3_x4b8f")]
-position = Vector2(549, 249)
-
 [node name="Enemy12" parent="." instance=ExtResource("3_x4b8f")]
 position = Vector2(479, 214)
-
-[node name="Enemy13" parent="." instance=ExtResource("3_x4b8f")]
-position = Vector2(422, 220)
 
 [node name="Enemy14" parent="." instance=ExtResource("3_x4b8f")]
 position = Vector2(370, 293)
@@ -56,7 +41,3 @@ can_move = false
 
 [node name="Enemy3" parent="." instance=ExtResource("3_x4b8f")]
 position = Vector2(488, 353)
-
-[node name="Enemy4" parent="." instance=ExtResource("3_x4b8f")]
-position = Vector2(409, 309)
-can_move = false
