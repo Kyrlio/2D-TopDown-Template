@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://763naix20y55"]
+[gd_scene load_steps=5 format=3 uid="uid://763naix20y55"]
 
 [ext_resource type="Texture2D" uid="uid://dyf12pofcxrsk" path="res://assets/BG.png" id="1_2venv"]
+[ext_resource type="PackedScene" uid="uid://5m4t7qwwcyvd" path="res://scenes/grass.tscn" id="1_x4b8f"]
 [ext_resource type="PackedScene" uid="uid://hwmgqg603fae" path="res://scenes/player.tscn" id="2_j6w7d"]
 [ext_resource type="PackedScene" uid="uid://1krmrwbscl21" path="res://scenes/enemy.tscn" id="3_x4b8f"]
 
@@ -14,30 +15,79 @@ offset_bottom = 664.0
 texture = ExtResource("1_2venv")
 stretch_mode = 1
 
-[node name="Player" parent="." instance=ExtResource("2_j6w7d")]
+[node name="EnvironmentObjects" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Player" parent="EnvironmentObjects" instance=ExtResource("2_j6w7d")]
+z_index = 0
 position = Vector2(489, 310)
 
-[node name="Enemy" parent="." instance=ExtResource("3_x4b8f")]
-position = Vector2(457, 239)
+[node name="Enemy" parent="EnvironmentObjects" instance=ExtResource("3_x4b8f")]
+position = Vector2(420, 126)
 
-[node name="Enemy6" parent="." instance=ExtResource("3_x4b8f")]
-position = Vector2(381, 217)
+[node name="Enemy6" parent="EnvironmentObjects" instance=ExtResource("3_x4b8f")]
+position = Vector2(344, 104)
 
-[node name="Enemy7" parent="." instance=ExtResource("3_x4b8f")]
-position = Vector2(364, 333)
+[node name="Enemy7" parent="EnvironmentObjects" instance=ExtResource("3_x4b8f")]
+position = Vector2(197, 363)
 
-[node name="Enemy10" parent="." instance=ExtResource("3_x4b8f")]
-position = Vector2(568, 327)
+[node name="Enemy10" parent="EnvironmentObjects" instance=ExtResource("3_x4b8f")]
+position = Vector2(579, 386)
 
-[node name="Enemy12" parent="." instance=ExtResource("3_x4b8f")]
-position = Vector2(479, 214)
+[node name="Enemy12" parent="EnvironmentObjects" instance=ExtResource("3_x4b8f")]
+position = Vector2(442, 101)
 
-[node name="Enemy14" parent="." instance=ExtResource("3_x4b8f")]
-position = Vector2(370, 293)
+[node name="Enemy14" parent="EnvironmentObjects" instance=ExtResource("3_x4b8f")]
+position = Vector2(203, 323)
 
-[node name="Enemy2" parent="." instance=ExtResource("3_x4b8f")]
+[node name="Enemy2" parent="EnvironmentObjects" instance=ExtResource("3_x4b8f")]
 position = Vector2(544, 314)
 can_move = false
 
-[node name="Enemy3" parent="." instance=ExtResource("3_x4b8f")]
-position = Vector2(488, 353)
+[node name="Enemy3" parent="EnvironmentObjects" instance=ExtResource("3_x4b8f")]
+position = Vector2(499, 412)
+
+[node name="Grasses" type="Node2D" parent="EnvironmentObjects"]
+y_sort_enabled = true
+
+[node name="Grass" parent="EnvironmentObjects/Grasses" instance=ExtResource("1_x4b8f")]
+position = Vector2(431, 323)
+
+[node name="Grass13" parent="EnvironmentObjects/Grasses" instance=ExtResource("1_x4b8f")]
+position = Vector2(434, 292)
+
+[node name="Grass14" parent="EnvironmentObjects/Grasses" instance=ExtResource("1_x4b8f")]
+position = Vector2(452, 300)
+
+[node name="Grass2" parent="EnvironmentObjects/Grasses" instance=ExtResource("1_x4b8f")]
+position = Vector2(421, 332)
+
+[node name="Grass3" parent="EnvironmentObjects/Grasses" instance=ExtResource("1_x4b8f")]
+position = Vector2(439, 332)
+
+[node name="Grass4" parent="EnvironmentObjects/Grasses" instance=ExtResource("1_x4b8f")]
+position = Vector2(431, 342)
+
+[node name="Grass5" parent="EnvironmentObjects/Grasses" instance=ExtResource("1_x4b8f")]
+position = Vector2(415, 323)
+
+[node name="Grass6" parent="EnvironmentObjects/Grasses" instance=ExtResource("1_x4b8f")]
+position = Vector2(405, 332)
+
+[node name="Grass7" parent="EnvironmentObjects/Grasses" instance=ExtResource("1_x4b8f")]
+position = Vector2(423, 332)
+
+[node name="Grass8" parent="EnvironmentObjects/Grasses" instance=ExtResource("1_x4b8f")]
+position = Vector2(415, 342)
+
+[node name="Grass9" parent="EnvironmentObjects/Grasses" instance=ExtResource("1_x4b8f")]
+position = Vector2(400, 323)
+
+[node name="Grass10" parent="EnvironmentObjects/Grasses" instance=ExtResource("1_x4b8f")]
+position = Vector2(390, 332)
+
+[node name="Grass11" parent="EnvironmentObjects/Grasses" instance=ExtResource("1_x4b8f")]
+position = Vector2(408, 332)
+
+[node name="Grass12" parent="EnvironmentObjects/Grasses" instance=ExtResource("1_x4b8f")]
+position = Vector2(400, 342)

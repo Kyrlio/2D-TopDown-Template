@@ -146,15 +146,15 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nenq2"]
-size = Vector2(12, 12)
+size = Vector2(10, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
-size = Vector2(14, 14)
+size = Vector2(12, 12)
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 light_mask = 4
 visibility_layer = 2
-z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_md0e3")
 knockback_force = 100.0
 
@@ -162,6 +162,7 @@ knockback_force = 100.0
 texture_filter = 1
 material = SubResource("ShaderMaterial_5uy6h")
 texture = ExtResource("2_md0e3")
+offset = Vector2(0, -5)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 root_node = NodePath("../..")
@@ -170,7 +171,9 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 light_mask = 4
+position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_nenq2")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -180,6 +183,7 @@ visibility_layer = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 light_mask = 4
 visibility_layer = 2
+position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_md0e3")
 
 [connection signal="animation_finished" from="Sprite2D/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

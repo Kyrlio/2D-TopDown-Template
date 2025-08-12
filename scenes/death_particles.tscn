@@ -26,6 +26,7 @@ scale_curve = SubResource("CurveTexture_5uy6h")
 color = Color(0.726223, 3.41728e-06, 5.77569e-07, 1)
 
 [node name="DeathParticles" type="Node2D"]
+z_index = -1
 script = ExtResource("1_j5v76")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
