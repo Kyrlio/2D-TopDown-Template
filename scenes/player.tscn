@@ -1,9 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://hwmgqg603fae"]
+[gd_scene load_steps=27 format=3 uid="uid://hwmgqg603fae"]
 
 [ext_resource type="Script" uid="uid://qajblsskt5wv" path="res://scripts/player.gd" id="1_qhqgy"]
 [ext_resource type="Shader" uid="uid://dpcyeveyw771a" path="res://scripts/damage_flash.gdshader" id="2_qlg0r"]
-[ext_resource type="Texture2D" uid="uid://csfdp2aacgjxo" path="res://assets/tile_0098.png" id="3_dqkch"]
-[ext_resource type="Texture2D" uid="uid://gdrwf3aya6km" path="res://assets/tile_0104.png" id="4_dqkch"]
+[ext_resource type="Texture2D" uid="uid://1lcq3is04bv1" path="res://assets/entities/tile_0098_both.png" id="3_dqkch"]
+[ext_resource type="Texture2D" uid="uid://gdrwf3aya6km" path="res://assets/weapons/tile_0104.png" id="4_dqkch"]
 
 [sub_resource type="Curve" id="Curve_qlg0r"]
 _data = [Vector2(0.00531916, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.382023), -1.98034, 0.0, 0, 0]
@@ -106,8 +106,78 @@ tracks/5/keys = {
 "values": [0.0]
 }
 
+[sub_resource type="Animation" id="Animation_ur7pv"]
+resource_name = "dash"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.35, 0.4),
+"transitions": PackedFloat32Array(1, 0.5, 2, 0.5),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.8, 0.6), Vector2(1.8, 0.6), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/flash_value")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.35, 0.4),
+"transitions": PackedFloat32Array(1, 0.5, 2, 2),
+"update": 0,
+"values": [0.0, 0.2, 0.2, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("Sprite2D/Sword:material:shader_parameter/flash_value")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.35, 0.4),
+"transitions": PackedFloat32Array(1, 0.5, 2, 2),
+"update": 0,
+"values": [0.0, 0.2, 0.2, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_f1ej7"]
+resource_name = "hurt_left"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(0.5, -2, 0.5),
+"update": 0,
+"values": [Vector2(-1, 1), Vector2(-0.7, 0.7), Vector2(-1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/flash_value")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(0.5, 2, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+
 [sub_resource type="Animation" id="Animation_qlg0r"]
-resource_name = "hurt"
+resource_name = "hurt_right"
 length = 0.2
 step = 0.1
 tracks/0/type = "value"
@@ -133,6 +203,45 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(0.5, 2, 1),
 "update": 0,
 "values": [0.0, 1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_jej6c"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_qhqgy"]
@@ -189,52 +298,13 @@ tracks/3/keys = {
 "values": [Vector2(1, 1), Vector2(0.8, 1.2), Vector2(1.4, 0.8), Vector2(1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_ur7pv"]
-resource_name = "dash"
-length = 0.4
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.35, 0.4),
-"transitions": PackedFloat32Array(1, 0.5, 2, 0.5),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1.8, 0.6), Vector2(1.8, 0.6), Vector2(1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = false
-tracks/1/path = NodePath("Sprite2D:material:shader_parameter/flash_value")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.35, 0.4),
-"transitions": PackedFloat32Array(1, 0.5, 2, 2),
-"update": 0,
-"values": [0.0, 0.2, 0.2, 0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = false
-tracks/2/path = NodePath("Sprite2D/Sword:material:shader_parameter/flash_value")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.35, 0.4),
-"transitions": PackedFloat32Array(1, 0.5, 2, 2),
-"update": 0,
-"values": [0.0, 0.2, 0.2, 0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qlg0r"]
 _data = {
 &"RESET": SubResource("Animation_dqkch"),
 &"dash": SubResource("Animation_ur7pv"),
-&"hurt": SubResource("Animation_qlg0r"),
+&"hurt_left": SubResource("Animation_f1ej7"),
+&"hurt_right": SubResource("Animation_qlg0r"),
+&"idle": SubResource("Animation_jej6c"),
 &"walk": SubResource("Animation_qhqgy")
 }
 
@@ -448,8 +518,9 @@ _data = {
 &"look_right": SubResource("Animation_3v2ag")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f1ej7"]
-size = Vector2(8, 3)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dqkch"]
+radius = 4.0
+height = 10.0
 
 [node name="Player" type="CharacterBody2D"]
 light_mask = 2
@@ -477,6 +548,7 @@ material = SubResource("ShaderMaterial_tuyoq")
 position = Vector2(0, -3)
 texture = ExtResource("3_dqkch")
 offset = Vector2(0, -5)
+hframes = 2
 
 [node name="Sword" type="Sprite2D" parent="Sprite2D"]
 material = SubResource("ShaderMaterial_dqkch")
@@ -496,8 +568,9 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1.5)
-shape = SubResource("RectangleShape2D_f1ej7")
+z_index = 1
+position = Vector2(0, -5)
+shape = SubResource("CapsuleShape2D_dqkch")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)

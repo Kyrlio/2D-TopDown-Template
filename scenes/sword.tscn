@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://uwkj5evl1jsg"]
 
-[ext_resource type="Texture2D" uid="uid://dp5ab8fn3hsw5" path="res://assets/sword.png" id="1_ycbs3"]
+[ext_resource type="Texture2D" uid="uid://dp5ab8fn3hsw5" path="res://assets/weapons/sword.png" id="1_ycbs3"]
 
 [sub_resource type="Animation" id="Animation_fjrip"]
 length = 0.001

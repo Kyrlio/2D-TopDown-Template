@@ -69,7 +69,6 @@ func _physics_process(delta: float) -> void:
 		animation_player.speed_scale =  animation_length / dash_duration
 		#print("dash duration: ", dash_duration, " | animation length: ", animation_length, " | animation speed scale: ", animation_player.speed_scale)
 	
-	
 	update_look()
 	dash(delta)
 	move_and_slide()
@@ -111,7 +110,8 @@ func move(delta: float):
 		run_particles.emitting = false
 		animation_player.speed_scale = 0.75
 		if not is_hurt:
-			animation_player.stop()
+			animation_player.play("idle")
+			#animation_player.stop()
 	
 	var velocity_weight_x: float = 1.0 - exp( -(ACCELERATION if input.x else FRICTION) * delta)
 	velocity.x = lerp(velocity.x, input.x * MAX_SPEED, velocity_weight_x)
@@ -121,12 +121,22 @@ func move(delta: float):
 
 
 func update_look():
+	#print(current_look_dir, " | ", get_global_mouse_position().x, " | ", global_position.x)
 	if current_look_dir == "right" and get_global_mouse_position().x < global_position.x:
 		flip_anim.play("look_left")
 		current_look_dir = "left"
 	elif current_look_dir == "left" and get_global_mouse_position().x > global_position.x:
 		flip_anim.play("look_right")
 		current_look_dir = "right"
+	
+	#print(get_global_mouse_position().y, " | ", global_position.y - 10)
+	
+	if get_global_mouse_position().y > (global_position.y - 20):
+		$Sprite2D/Sword.show_behind_parent = false
+		$Sprite2D.frame = 0
+	else:
+		$Sprite2D/Sword.show_behind_parent = true
+		$Sprite2D.frame = 1
 
 
 const sword_slash_preload = preload("res://scenes/sword_slash.tscn")
@@ -163,13 +173,19 @@ func take_damage(damage: float):
 			queue_free()
 		
 		is_hurt = true
-		animation_player.play("hurt")
+		
+		# Play correct animation
+		if current_look_dir == "right":
+			animation_player.play("hurt_right")
+		elif current_look_dir == "left":
+			animation_player.play("hurt_left")
 	else:
 		return
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	match anim_name:
-		"hurt": is_hurt = false
+		"hurt_right": is_hurt = false
+		"hurt_left": is_hurt = false
 		"dash": not_dashing()
 		_: return

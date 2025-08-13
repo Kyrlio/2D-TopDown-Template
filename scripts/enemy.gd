@@ -34,6 +34,10 @@ func _physics_process(delta: float) -> void:
 		var direction = (player_node.global_position - global_position).normalized()
 		velocity = lerp(velocity, direction * speed, 8.5 * delta)
 		$Sprite2D/AnimationPlayer.play("walk")
+		if direction.y < -0.2:
+			$Sprite2D.frame = 1
+		else:
+			$Sprite2D.frame = 0
 	
 	move_and_slide()
 

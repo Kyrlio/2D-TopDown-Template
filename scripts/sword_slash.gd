@@ -1,4 +1,5 @@
 extends Node2D
+class_name WeaponSlash
 
 var weapon_damage: float = 1.0
 @export var knockback_force: float = 50.0
@@ -19,3 +20,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		body.take_damage(weapon_damage)
 		var knockback_direction = (body.global_position - global_position).normalized()
 		body.apply_knockback(knockback_direction, knockback_force, knockback_duration)
+
+func get_area_2d() -> Area2D:
+	return $Area2D

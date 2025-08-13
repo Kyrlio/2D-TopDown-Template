@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cupjcrlp8i0x7" path="res://scripts/enemy.gd" id="1_md0e3"]
 [ext_resource type="Shader" uid="uid://dpcyeveyw771a" path="res://scripts/damage_flash.gdshader" id="2_4ra3w"]
-[ext_resource type="Texture2D" uid="uid://c22omo5u4svhq" path="res://assets/tile_0121.png" id="2_md0e3"]
+[ext_resource type="Texture2D" uid="uid://b1mfepd4dc438" path="res://assets/entities/tile_0121_both.png" id="3_4ra3w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5uy6h"]
 resource_local_to_scene = true
@@ -145,8 +145,8 @@ _data = {
 &"walk": SubResource("Animation_xwavj")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nenq2"]
-size = Vector2(10, 8)
+[sub_resource type="CircleShape2D" id="CircleShape2D_4ra3w"]
+radius = 4.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
 size = Vector2(12, 12)
@@ -161,8 +161,9 @@ knockback_force = 100.0
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 material = SubResource("ShaderMaterial_5uy6h")
-texture = ExtResource("2_md0e3")
+texture = ExtResource("3_4ra3w")
 offset = Vector2(0, -5)
+hframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 root_node = NodePath("../..")
@@ -171,10 +172,12 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 light_mask = 4
-position = Vector2(0, 2)
-shape = SubResource("RectangleShape2D_nenq2")
+visibility_layer = 2
+z_index = 1
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_4ra3w")
+debug_color = Color(0.961976, 0, 0.507259, 0.42)
 
 [node name="Area2D" type="Area2D" parent="."]
 light_mask = 4

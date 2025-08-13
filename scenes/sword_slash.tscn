@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://8axtna151dju"]
 
 [ext_resource type="Script" uid="uid://bt6gm18pnqr4p" path="res://scripts/sword_slash.gd" id="1_e3omh"]
-[ext_resource type="Texture2D" uid="uid://dhv4jkpaea51i" path="res://assets/slash.png" id="2_nenib"]
+[ext_resource type="Texture2D" uid="uid://dhv4jkpaea51i" path="res://assets/weapons/slash.png" id="2_nenib"]
 
 [sub_resource type="Animation" id="Animation_yfsmo"]
 length = 0.001
@@ -141,6 +141,7 @@ _data = {
 size = Vector2(35, 22)
 
 [node name="SwordSlash" type="Node2D"]
+z_index = 1
 script = ExtResource("1_e3omh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
