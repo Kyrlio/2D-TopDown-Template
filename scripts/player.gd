@@ -31,15 +31,20 @@ var dash_timer : float = 0.0
 @export var dash_curve: Curve
 @export var dash_cooldown: float = 1
 
-# --- ATTACKS ---
+# --- ATTACKS & COMBOS---
 var can_slash: bool = true
-@export var slash_time: float = 0.2
+@export var slash_time: float = 0.3
 @export var sword_return_time: float = 0.5
 @export var weapon_damage: float = 1.0
 
+var combo_count: int = 0
+var max_combo: int = 2
+var combo_window_timer: float = 0.0
+@export var combo_window_duration: float = 0.8 # Temps pour enchainer le prochain coup
+var attack_buffered: bool = false # Pour gérer les inputs en buffer pendant l'animation
+
 var knockback: Vector2 = Vector2.ZERO
 var knockback_timer: float = 0.0
-
 
 
 func _physics_process(delta: float) -> void:
@@ -51,11 +56,9 @@ func _physics_process(delta: float) -> void:
 	else:
 		if not is_hurt and not is_dashing:
 			move(delta)
-	# --- ATTACK ---
-	if Input.is_action_pressed("attack") and can_slash:
-		sword_anim.speed_scale = sword_anim.get_animation("slash").length / slash_time
-		sword_anim.play("slash")
-		can_slash = false
+	
+	# --- ATTACK SYSTEM ---
+	handle_attack_input()
 	
 	# --- DASH ---
 	if Input.is_action_just_pressed("dash") and not is_hurt and input and dash_timer <= 0:
@@ -77,6 +80,7 @@ func _physics_process(delta: float) -> void:
 func dash(delta):
 	# Perform dash
 	if is_dashing:
+		can_slash = false
 		var current_distance = position.distance_to(dash_start_position)
 		#print("dash? ", is_dashing, " | pos: ", global_position, " | start: ", dash_start_position, " | dist: ", current_distance)
 		if current_distance >= dash_max_distance or is_on_wall():
@@ -92,6 +96,7 @@ func not_dashing():
 	if not is_dashing:
 		return
 	else:
+		can_slash = true
 		is_dashing = false
 
 func move(delta: float):
@@ -139,6 +144,48 @@ func update_look():
 		$Sprite2D.frame = 1
 
 
+func handle_attack_input():
+	if Input.is_action_pressed("attack"):
+		if can_slash:
+			perform_attack()
+		else:
+			attack_buffered = true
+
+
+func perform_attack():
+	combo_count += 1
+	can_slash = false
+	attack_buffered = false
+	
+	if combo_count == 1:
+		combo_window_timer = combo_window_duration
+	
+	var anim_name = get_slash_animation_name()
+	
+	sword_anim.speed_scale = sword_anim.get_animation(anim_name).length / slash_time
+	sword_anim.play(anim_name)
+	
+	print("Combo hit: ", combo_count, " | Animation: ", anim_name)
+
+
+func get_slash_animation_name() -> String:
+	match combo_count:
+		1: return "slash"
+		2: return "slash_2"
+		_: return "slash"
+
+
+func reset_combo():
+	print(combo_count)
+	if combo_count == 1:
+		sword_anim.speed_scale = sword_anim.get_animation("sword_return").length / sword_return_time
+		sword_anim.play("sword_return") 
+	combo_count = 0
+	attack_buffered = false
+	
+	
+
+
 const sword_slash_preload = preload("res://scenes/sword_slash.tscn")
 func spawn_slash():
 	var sword_slash_var = sword_slash_preload.instantiate()
@@ -150,11 +197,19 @@ func spawn_slash():
 
 
 func _on_sword_anim_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "slash":
-		sword_anim.speed_scale = sword_anim.get_animation("sword_return").length / sword_return_time
-		sword_anim.play("sword_return")
-	else:
-		can_slash = true
+	match anim_name:
+		"slash":
+			can_slash = true
+			await get_tree().create_timer(0.2).timeout
+			if combo_count == 1:
+				reset_combo()
+		
+		"slash_2":
+			reset_combo()
+			can_slash = true
+		
+		"sword_return":
+			can_slash = true
 
 
 func apply_knockback(direction: Vector2, force: float, knockback_duration: float) -> void:
@@ -166,6 +221,10 @@ func take_damage(damage: float):
 	if not is_hurt:
 		if is_dashing:
 			not_dashing()
+		
+		reset_combo()
+		can_slash = true
+		
 		health -= damage
 		print("life : " + str(health))
 		
