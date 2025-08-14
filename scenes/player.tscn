@@ -1,9 +1,10 @@
-[gd_scene load_steps=28 format=3 uid="uid://hwmgqg603fae"]
+[gd_scene load_steps=29 format=3 uid="uid://hwmgqg603fae"]
 
 [ext_resource type="Script" uid="uid://qajblsskt5wv" path="res://scripts/player.gd" id="1_qhqgy"]
 [ext_resource type="Shader" uid="uid://dpcyeveyw771a" path="res://scripts/damage_flash.gdshader" id="2_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://1lcq3is04bv1" path="res://assets/entities/tile_0098_both.png" id="3_dqkch"]
 [ext_resource type="Texture2D" uid="uid://gdrwf3aya6km" path="res://assets/weapons/tile_0104.png" id="4_dqkch"]
+[ext_resource type="PackedScene" uid="uid://bytdsihpt8723" path="res://scenes/camera_2d.tscn" id="5_qlg0r"]
 
 [sub_resource type="Curve" id="Curve_qlg0r"]
 _data = [Vector2(0.00531916, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.382023), -1.98034, 0.0, 0, 0]
@@ -390,35 +391,6 @@ tracks/2/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_smehm"]
-resource_name = "sword_return"
-length = 0.65
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.65),
-"transitions": PackedFloat32Array(-2, -2, 0.5),
-"update": 0,
-"values": [4.45059, 4.45059, -0.261799]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:scale")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.65),
-"transitions": PackedFloat32Array(0.5, 0.5),
-"update": 0,
-"values": [Vector2(0.8, 0.95), Vector2(1, 1)]
-}
-
 [sub_resource type="Animation" id="Animation_oprun"]
 resource_name = "slash_2"
 length = 0.3
@@ -460,6 +432,35 @@ tracks/2/keys = {
 "args": [],
 "method": &"spawn_slash"
 }]
+}
+
+[sub_resource type="Animation" id="Animation_smehm"]
+resource_name = "sword_return"
+length = 0.65
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.65),
+"transitions": PackedFloat32Array(-2, -2, 0.5),
+"update": 0,
+"values": [4.45059, 4.45059, -0.261799]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.65),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(0.8, 0.95), Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ur7pv"]
@@ -616,11 +617,8 @@ z_index = 1
 position = Vector2(0, -5)
 shape = SubResource("CapsuleShape2D_dqkch")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" parent="." instance=ExtResource("5_qlg0r")]
 zoom = Vector2(4, 4)
-process_callback = 0
-position_smoothing_enabled = true
-rotation_smoothing_enabled = true
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="Sprite2D/Sword/SwordAnim" to="." method="_on_sword_anim_animation_finished"]

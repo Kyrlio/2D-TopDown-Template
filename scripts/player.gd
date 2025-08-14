@@ -16,6 +16,7 @@ var current_look_dir = "right"
 
 @export var health: float = 3.0
 var is_hurt: bool = false
+var can_take_damage: bool = true
 
 # --- MOVEMENTS ---
 var input: Vector2 = Vector2.ZERO
@@ -80,6 +81,8 @@ func _physics_process(delta: float) -> void:
 func dash(delta):
 	# Perform dash
 	if is_dashing:
+		can_take_damage = false
+		$CollisionShape2D.disabled = true
 		can_slash = false
 		var current_distance = position.distance_to(dash_start_position)
 		#print("dash? ", is_dashing, " | pos: ", global_position, " | start: ", dash_start_position, " | dist: ", current_distance)
@@ -98,6 +101,8 @@ func not_dashing():
 	else:
 		can_slash = true
 		is_dashing = false
+		can_take_damage = true
+		$CollisionShape2D.disabled = false
 
 func move(delta: float):
 	# --- MOVEMENTS ---
@@ -206,6 +211,7 @@ func _on_sword_anim_animation_finished(anim_name: StringName) -> void:
 		
 		"slash_2":
 			reset_combo()
+			await get_tree().create_timer(0.1).timeout
 			can_slash = true
 		
 		"sword_return":
@@ -232,6 +238,9 @@ func take_damage(damage: float):
 			queue_free()
 		
 		is_hurt = true
+		
+		# Apply screen shake
+		$Camera2D.screen_shake(2, 0.5)
 		
 		# Play correct animation
 		if current_look_dir == "right":

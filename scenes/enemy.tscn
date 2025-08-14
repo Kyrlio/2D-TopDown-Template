@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://1krmrwbscl21"]
+[gd_scene load_steps=11 format=3 uid="uid://1krmrwbscl21"]
 
 [ext_resource type="Script" uid="uid://cupjcrlp8i0x7" path="res://scripts/enemy.gd" id="1_md0e3"]
 [ext_resource type="Shader" uid="uid://dpcyeveyw771a" path="res://scripts/damage_flash.gdshader" id="2_4ra3w"]
@@ -60,11 +60,6 @@ tracks/3/keys = {
 "update": 0,
 "values": [0.0]
 }
-
-[sub_resource type="Animation" id="Animation_4ra3w"]
-resource_name = "death"
-length = 10.0
-step = 0.05
 
 [sub_resource type="Animation" id="Animation_5uy6h"]
 resource_name = "take_damage"
@@ -140,7 +135,6 @@ tracks/2/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xwavj"]
 _data = {
 &"RESET": SubResource("Animation_c4w8v"),
-&"death": SubResource("Animation_4ra3w"),
 &"take_damage": SubResource("Animation_5uy6h"),
 &"walk": SubResource("Animation_xwavj")
 }

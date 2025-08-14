@@ -11,6 +11,8 @@ const FRICTION: float = 150.0
 @export var can_move: bool = true
 @export var damage: float = 1.0
 
+var is_dead: bool = false
+
 var taking_damage: bool = false
 var knockback: Vector2 = Vector2.ZERO
 var knockback_timer: float = 0.0
@@ -48,11 +50,7 @@ func take_damage(weapon_damage: float):
 		health -= weapon_damage
 		
 		if health <= 0.0:
-			var death_scene = DEATH_PARTICLES.instantiate()
-			add_sibling(death_scene)
-			death_scene.global_position = global_position
-			death_scene.death_particles()
-			death()
+			is_dead = true
 		
 		taking_damage = true
 	else:
@@ -62,10 +60,12 @@ func take_damage(weapon_damage: float):
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "take_damage":
 		taking_damage = false
-
-
-func death():
-	queue_free()
+		if is_dead:
+			var death_scene = DEATH_PARTICLES.instantiate()
+			add_sibling(death_scene)
+			death_scene.global_position = global_position
+			death_scene.death_particles()
+			queue_free()
 
 
 func apply_knockback(direction: Vector2, force: float, knockback_duration: float) -> void:
