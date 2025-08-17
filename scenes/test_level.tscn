@@ -28,7 +28,7 @@ offset_top = 224.0
 offset_right = 638.0
 offset_bottom = 287.0
 text = "dash : space
-rmb : attack"
+lmb : attack"
 label_settings = SubResource("LabelSettings_x4b8f")
 horizontal_alignment = 1
 vertical_alignment = 1

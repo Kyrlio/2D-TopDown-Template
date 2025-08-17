@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwmk8dfyqsy7o"]
+
+[sub_resource type="GDScript" id="GDScript_leat1"]
+script/source = "extends Node2D
+
+
+"
+
+[node name="WeaponManager" type="Node2D"]
+script = SubResource("GDScript_leat1")

@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://uwkj5evl1jsg"]
+[gd_scene load_steps=8 format=3 uid="uid://uwkj5evl1jsg"]
 
-[ext_resource type="Texture2D" uid="uid://dp5ab8fn3hsw5" path="res://assets/weapons/sword.png" id="1_ycbs3"]
+[ext_resource type="Texture2D" uid="uid://gdrwf3aya6km" path="res://assets/weapons/tile_0104.png" id="1_ycbs3"]
+[ext_resource type="Script" uid="uid://uartloxtwi32" path="res://scripts/sword.gd" id="2_n355p"]
 
 [sub_resource type="Animation" id="Animation_fjrip"]
 length = 0.001
@@ -14,7 +15,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [-0.261799]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -43,7 +44,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(0.5, -2),
 "update": 0,
-"values": [0.0, 4.45059]
+"values": [-0.261799, 4.45059]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -60,7 +61,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../..")
+tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -68,7 +69,50 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"spawn_slash"
+"method": &"_global_spawn_slash"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_oprun"]
+resource_name = "slash_2"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(-2, 0.5),
+"update": 0,
+"values": [4.45059, -0.261799]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(0.8, 0.95), Vector2(1, 1)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.05),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_global_spawn_slash"
 }]
 }
 
@@ -86,7 +130,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.65),
 "transitions": PackedFloat32Array(-2, -2, 0.5),
 "update": 0,
-"values": [4.45059, 4.45059, 0.0]
+"values": [4.45059, 4.45059, -0.261799]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -105,13 +149,16 @@ tracks/1/keys = {
 _data = {
 &"RESET": SubResource("Animation_fjrip"),
 &"slash": SubResource("Animation_tuyoq"),
+&"slash_2": SubResource("Animation_oprun"),
 &"sword_return": SubResource("Animation_smehm")
 }
 
 [node name="Sword" type="Sprite2D"]
+texture_filter = 1
+rotation = -0.261799
 texture = ExtResource("1_ycbs3")
-offset = Vector2(-8, -8)
-hframes = 2
+offset = Vector2(-8, -5)
+script = ExtResource("2_n355p")
 
 [node name="SwordAnim" type="AnimationPlayer" parent="."]
 libraries = {
