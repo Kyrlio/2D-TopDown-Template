@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://763naix20y55"]
+[gd_scene load_steps=8 format=3 uid="uid://763naix20y55"]
 
 [ext_resource type="Texture2D" uid="uid://dyf12pofcxrsk" path="res://assets/world/BG.png" id="1_2venv"]
 [ext_resource type="Script" uid="uid://cri858d1a1006" path="res://scripts/level.gd" id="1_tmr53"]
 [ext_resource type="PackedScene" uid="uid://5m4t7qwwcyvd" path="res://scenes/grass.tscn" id="1_x4b8f"]
 [ext_resource type="PackedScene" uid="uid://hwmgqg603fae" path="res://scenes/player.tscn" id="2_j6w7d"]
 [ext_resource type="PackedScene" uid="uid://1krmrwbscl21" path="res://scenes/enemy.tscn" id="3_x4b8f"]
+[ext_resource type="PackedScene" uid="uid://c2cwmjdx0vba1" path="res://scenes/double_axe.tscn" id="4_qcd3b"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_x4b8f"]
 font_size = 15
@@ -39,6 +40,7 @@ y_sort_enabled = true
 [node name="Player" parent="EnvironmentObjects" instance=ExtResource("2_j6w7d")]
 z_index = 0
 position = Vector2(489, 310)
+starting_weapon = ExtResource("4_qcd3b")
 
 [node name="Enemy" parent="EnvironmentObjects" instance=ExtResource("3_x4b8f")]
 position = Vector2(420, 126)

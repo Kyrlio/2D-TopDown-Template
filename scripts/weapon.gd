@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 class_name Weapon
 
 # Signaux pour communiquer avec le WeaponManager
@@ -11,6 +11,9 @@ signal combo_reset()
 @export var return_time: float = 0.5
 @export var combo_window_duration: float = 0.8 # Temps pour enchainer le prochain coup
 @export var max_combo: int = 2
+
+@export var knockback_force: float = 50.0
+@export var knockback_duration: float = 0.12
 
 # Variables internes
 var combo_count: int = 0:

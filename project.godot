@@ -19,6 +19,17 @@ config/icon="uid://chbupusil3e51"
 
 mouse_cursor/custom_image="uid://cywoy2xt6tlvi"
 
+[file_customization]
+
+folder_colors={
+"res://assets/": "green",
+"res://assets/entities/": "teal",
+"res://assets/weapons/": "blue",
+"res://assets/world/": "purple",
+"res://scenes/": "yellow",
+"res://scripts/": "red"
+}
+
 [input]
 
 up={

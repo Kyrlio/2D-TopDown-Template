@@ -24,7 +24,7 @@ func perform_attack():
 	sword_anim.play(anim_name)
 	attack_started.emit(combo_count)
 	
-	print("Sword: Combo hit: ", combo_count, " | Animation: ", anim_name)
+	#print("Sword: Combo hit: ", combo_count, " | Animation: ", anim_name)
 
 func get_attack_animation_name() -> String:
 	match combo_count:
@@ -33,7 +33,7 @@ func get_attack_animation_name() -> String:
 		_: return "slash"
 
 func reset_combo() -> void:
-	print("Sword: Reset combo, count was: ", combo_count)
+	#print("Sword: Reset combo, count was: ", combo_count)
 	if combo_count == 1:
 		sword_anim.speed_scale = sword_anim.get_animation("sword_return").length / return_time
 		sword_anim.play("sword_return") 

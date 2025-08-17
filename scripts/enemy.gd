@@ -19,7 +19,10 @@ var knockback_timer: float = 0.0
 @export var knockback_force: float = 50.0
 @export var knockback_duration: float = 0.12
 
+var death_scene
+
 func _ready() -> void:
+	death_scene = DEATH_PARTICLES.instantiate()
 	add_to_group("enemy")
 
 
@@ -41,8 +44,10 @@ func _physics_process(delta: float) -> void:
 		else:
 			$Sprite2D.frame = 0
 	
+	death_scene.global_position = global_position
 	move_and_slide()
 
+			
 
 func take_damage(weapon_damage: float):
 	if not taking_damage:
@@ -50,6 +55,8 @@ func take_damage(weapon_damage: float):
 		health -= weapon_damage
 		
 		if health <= 0.0:
+			add_sibling(death_scene)
+			death_scene.trail_death_particles()
 			is_dead = true
 		
 		taking_damage = true
@@ -61,8 +68,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "take_damage":
 		taking_damage = false
 		if is_dead:
-			var death_scene = DEATH_PARTICLES.instantiate()
-			add_sibling(death_scene)
 			death_scene.global_position = global_position
 			death_scene.death_particles()
 			queue_free()

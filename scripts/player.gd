@@ -197,11 +197,17 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"dash": not_dashing()
 		_: return
 
+# Working
 func _on_weapon_attack_started(combo_count: int):
-	print("Player: Attack started, combo: ", combo_count)
+	#print("Player: Attack started, combo: ", combo_count)
+	pass
 
+# Working
 func _on_weapon_attack_finished(combo_count: int):
-	print("Player: Attack finished, combo: ", combo_count)
+	#print("Player: Attack finished, combo: ", combo_count)
+	pass
 
+# Working
 func _on_weapon_combo_reset():
-	print("Player: Combo reset")
+	#print("Player: Combo reset")
+	pass
