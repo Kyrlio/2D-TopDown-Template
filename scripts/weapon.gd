@@ -40,8 +40,6 @@ var animation_player: AnimationPlayer
 func _ready() -> void:
 	if get_parent().has_node("AnimationPlayer"):
 		animation_player = get_node("AnimationPlayer")
-	else:
-		null
 
 func initialize(player: CharacterBody2D):
 	owner_node = player

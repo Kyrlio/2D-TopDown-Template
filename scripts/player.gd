@@ -47,6 +47,7 @@ func _ready() -> void:
 		weapon.attack_started.connect(_on_weapon_attack_started)
 		weapon.attack_finished.connect(_on_weapon_attack_finished)
 		weapon.combo_reset.connect(_on_weapon_combo_reset)
+		
 
 func _physics_process(delta: float) -> void:
 	if knockback_timer > 0.0:
@@ -140,7 +141,7 @@ func update_look():
 	
 	#print(get_global_mouse_position().y, " | ", global_position.y - 10)
 	
-	if get_global_mouse_position().y > (global_position.y - 20):
+	if get_global_mouse_position().y > (global_position.y - 50):
 		weapon.show_behind_parent = false
 		$Sprite2D.frame = 0
 	else:
@@ -211,3 +212,6 @@ func _on_weapon_attack_finished(combo_count: int):
 func _on_weapon_combo_reset():
 	#print("Player: Combo reset")
 	pass
+
+func _on_enemy_took_damage():
+	$Camera2D.screen_shake(2, 0.5)

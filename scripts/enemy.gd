@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Enemy
 
+signal took_damage
+
 const DEATH_PARTICLES = preload("res://scenes/death_particles.tscn")
 const FRICTION: float = 150.0
 
@@ -24,6 +26,10 @@ var death_scene
 func _ready() -> void:
 	death_scene = DEATH_PARTICLES.instantiate()
 	add_to_group("enemy")
+	
+	# Connecter le signal took_damage au player
+	if player_node and player_node.has_method("_on_enemy_took_damage"):
+		took_damage.connect(player_node._on_enemy_took_damage)
 
 
 func _physics_process(delta: float) -> void:
@@ -51,8 +57,12 @@ func _physics_process(delta: float) -> void:
 
 func take_damage(weapon_damage: float):
 	if not taking_damage:
+		
 		$Sprite2D/AnimationPlayer.play("take_damage")
 		health -= weapon_damage
+		
+		# Émettre le signal took_damage
+		took_damage.emit()
 		
 		if health <= 0.0:
 			add_sibling(death_scene)
