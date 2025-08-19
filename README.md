@@ -1,4 +1,4 @@
-# 2D Top-Down Melee Sword
+# 2D Top-Down Template
 
 A 2D top-down action game created with Godot, featuring a melee combat system with different weapons and enemies.
 
