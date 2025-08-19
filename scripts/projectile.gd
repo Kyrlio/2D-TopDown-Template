@@ -1,7 +1,6 @@
 extends Sprite2D
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var ray_cast: RayCast2D = $RayCast2D
 
 @export var speed: float = 120.0
 @export var damage: float = 2.0
@@ -10,8 +9,6 @@ extends Sprite2D
 
 func _physics_process(delta: float) -> void:
 	global_position += Vector2(1,0).rotated(rotation) * speed * delta
-	#if ray_cast.is_colliding() and not ray_cast.get_collider() is Player:
-		#animation_player.play("remove")
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:

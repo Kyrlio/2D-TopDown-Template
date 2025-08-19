@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://5m4t7qwwcyvd" path="res://scenes/grass.tscn" id="1_x4b8f"]
 [ext_resource type="PackedScene" uid="uid://hwmgqg603fae" path="res://scenes/player.tscn" id="2_j6w7d"]
 [ext_resource type="PackedScene" uid="uid://1krmrwbscl21" path="res://scenes/enemy.tscn" id="3_x4b8f"]
-[ext_resource type="PackedScene" uid="uid://dw03mocb8lkwb" path="res://scenes/magic_wand.tscn" id="4_qcd3b"]
+[ext_resource type="PackedScene" uid="uid://c2cwmjdx0vba1" path="res://scenes/double_axe.tscn" id="4_qcd3b"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_x4b8f"]
 font_size = 15
