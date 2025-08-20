@@ -37,11 +37,11 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func get_area_2d() -> Area2D:
 	return $Area2D
 
-func change_slash_cshape(y: int) -> void:
+func change_slash_cshape(x: int, y: int) -> void:
 	var collision_shape = get_node("Area2D/CollisionShape2D")
 	if collision_shape:
 		var rect_shape = RectangleShape2D.new()
-		rect_shape.size = Vector2(35, y)
+		rect_shape.size = Vector2(x, y)
 		collision_shape.shape = rect_shape
 	else:
 		print("CollisionShape2D not found!")

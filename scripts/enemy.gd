@@ -6,7 +6,8 @@ signal took_damage
 const DEATH_PARTICLES = preload("res://scenes/death_particles.tscn")
 const FRICTION: float = 150.0
 
-@onready var player_node: CharacterBody2D = get_parent().get_node("Player")
+#@onready var player_node: CharacterBody2D = get_parent().get_node("Player")
+var player_node: CharacterBody2D
 
 @export var health: float = 3.0
 @export var speed: float = 35.0
@@ -26,8 +27,9 @@ var death_scene
 func _ready() -> void:
 	death_scene = DEATH_PARTICLES.instantiate()
 	add_to_group("enemy")
+	player_node = get_tree().get_first_node_in_group("player")
 	
-	# Connecter le signal took_damage au player
+	# Connect signal took_damage to player
 	if player_node and player_node.has_method("_on_enemy_took_damage"):
 		took_damage.connect(player_node._on_enemy_took_damage)
 
@@ -61,7 +63,6 @@ func take_damage(weapon_damage: float):
 		$Sprite2D/AnimationPlayer.play("take_damage")
 		health -= weapon_damage
 		
-		# Émettre le signal took_damage
 		took_damage.emit()
 		
 		if health <= 0.0:

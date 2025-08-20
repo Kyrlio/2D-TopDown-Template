@@ -29,6 +29,7 @@ var is_dashing: bool = false
 var dash_start_position: Vector2 = Vector2.ZERO
 var dash_direction: Vector2 = Vector2.ZERO
 var dash_timer : float = 0.0
+@export_group("Dash")
 @export var dash_speed: float = 200.0
 @export var dash_max_distance: float = 70.0
 @export var dash_curve: Curve
@@ -106,10 +107,7 @@ func not_dashing():
 
 func move(delta: float):
 	# --- MOVEMENTS ---
-	input = Vector2(
-		Input.get_action_strength("right") - Input.get_action_strength("left"),
-		Input.get_action_strength("down") - Input.get_action_strength("up")
-	).normalized()
+	input = Input.get_vector("left", "right", "up", "down")
 	
 	if input:
 		run_particles.emitting = true
@@ -122,6 +120,9 @@ func move(delta: float):
 		if not is_hurt:
 			animation_player.play("idle")
 			#animation_player.stop()
+	
+	#var target_velocity = input * MAX_SPEED
+	#velocity = velocity.lerp(target_velocity, 1.0 - exp(-20 * get_physics_process_delta_time()))
 	
 	var velocity_weight_x: float = 1.0 - exp( -(ACCELERATION if input.x else FRICTION) * delta)
 	velocity.x = lerp(velocity.x, input.x * MAX_SPEED, velocity_weight_x)

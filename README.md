@@ -100,20 +100,11 @@ git clone https://github.com/Kyrlio/2D-TopDown-Template.git
 - Knockback effects
 - Contextual animations
 
-## 🔧 Customization
+## 🔧 Next
 
-### Adding a New Weapon
-1. Create a new scene inheriting from `Weapon`
-2. Implement the `perform_attack()` method
-3. Configure animations and effects
-4. Add specific logic in a dedicated script
-
-### Modifying Parameters
-Exported variables allow easy modification of:
-- Player movement speed
-- Weapon damage
-- Combo duration
-- Dash distance and speed
+1. Upgrade enemy AI
+2. Create a real map (procedural dungeon)
+3. Make others enemies
 
 ## 📝 License
 
